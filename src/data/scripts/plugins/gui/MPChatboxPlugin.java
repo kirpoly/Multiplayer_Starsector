@@ -74,8 +74,8 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
         float w = Global.getSettings().getScreenWidthPixels();
         float h = Global.getSettings().getScreenHeightPixels();
 
-        Vector2f root1 = new Vector2f(w - 92f * scaleMult, h - 148f * scaleMult);
-        Vector2f root2 = new Vector2f(w - 364f * scaleMult, 500f * scaleMult);
+        Vector2f root1 = new Vector2f(w - 92f * scaleMult, h - 244f * scaleMult);
+        Vector2f root2 = new Vector2f(w - 364f * scaleMult, 596f * scaleMult);
 
         CMUKitUI.render(widget, root1, events);
 

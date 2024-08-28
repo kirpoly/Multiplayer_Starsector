@@ -105,10 +105,10 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
         float w = Global.getSettings().getScreenWidthPixels();
         float h = Global.getSettings().getScreenHeightPixels();
 
-        Vector2f root1 = new Vector2f(w - 32f * scaleMult, h - 148f * scaleMult);
+        Vector2f root1 = new Vector2f(w - 32f * scaleMult, h - 244f * scaleMult);
         CMUKitUI.render(widgetPanel, root1, events);
 
-        Vector2f root2 = new Vector2f(w - 306f * scaleMult, h - 175f * scaleMult);
+        Vector2f root2 = new Vector2f(w - 306f * scaleMult, h - 271f * scaleMult);
 
         shipSelectionPanel = initShipSelectionUI(plugin);
 
