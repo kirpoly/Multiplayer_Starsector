@@ -1,5 +1,6 @@
 package data.scripts.plugins.gui;
 
+import cmu.gui.Button;
 import cmu.gui.*;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
@@ -33,6 +34,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
     private static LazyFont.DrawableString TODRAW14;
     private static LazyFont.DrawableString TODRAW24;
 
+    // Define a class-level field for the scaling multiplier
+    private float scaleMult;
+
     private ListPanel hostPanel;
     private ListPanel joinPanel;
     private ListPanel widgetPanel;
@@ -54,12 +58,15 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     @Override
     public void init(CombatEngineAPI engine) {
+        // Initialize scaleMult once
+        scaleMult = Global.getSettings().getScreenScaleMult();
+
         if (TODRAW14 == null) {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/victor14.fnt");
                 TODRAW14 = fontdraw.createText();
-                if (Global.getSettings().getScreenScaleMult() > 1f)
-                    TODRAW14.setFontSize(14f * Global.getSettings().getScreenScaleMult());
+                if (scaleMult > 1f)
+                    TODRAW14.setFontSize(14f * scaleMult);
             } catch (FontException ignored) {
             }
         }
@@ -67,8 +74,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/orbitron24aa.fnt");
                 TODRAW24 = fontdraw.createText();
-                if (Global.getSettings().getScreenScaleMult() > 1f)
-                    TODRAW24.setFontSize(24f * Global.getSettings().getScreenScaleMult());
+                if (scaleMult > 1f)
+                    TODRAW24.setFontSize(24f * scaleMult);
             } catch (FontException ignored) {
             }
         }
@@ -162,15 +169,15 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initWidget() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 26f;
-        panelParams.y = 26f;
+        panelParams.x = 26f * scaleMult; // Scale x position
+        panelParams.y = 26f * scaleMult; // Scale y position
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
             @Override
             public void make(ListPanel panel1) {
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
-                buttonParams.width = 24f;
-                buttonParams.height = 24f;
+                buttonParams.width = 24f * scaleMult; // Scale width
+                buttonParams.height = 24f * scaleMult; // Scale height
                 buttonParams.text = "MP";
                 Text.TextParams textParams = new Text.TextParams();
                 textParams.align = LazyFont.TextAlignment.CENTER;
@@ -199,8 +206,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initSelect() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 300f;
-        panelParams.y = 120f;
+        panelParams.x = 300f * scaleMult; // Scale x position
+        panelParams.y = 120f * scaleMult; // Scale y position
         panelParams.update = true;
         panelParams.conformToListSize = true;
 
@@ -225,8 +232,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW14, buttonTextParams);
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
-                buttonParams.width = 120f;
-                buttonParams.height = 24f;
+                buttonParams.width = 120f * scaleMult; // Scale width
+                buttonParams.height = 24f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -245,8 +252,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW14, buttonTextParams2);
                 Button.ButtonParams buttonParams2 = new Button.ButtonParams();
-                buttonParams2.width = 120f;
-                buttonParams2.height = 24f;
+                buttonParams2.width = 120f * scaleMult; // Scale width
+                buttonParams2.height = 24f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback2 = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -265,8 +272,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW14, buttonTextParams3);
                 Button.ButtonParams buttonParams3 = new Button.ButtonParams();
-                buttonParams3.width = 120f;
-                buttonParams3.height = 24f;
+                buttonParams3.width = 120f * scaleMult; // Scale width
+                buttonParams3.height = 24f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback3 = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -288,8 +295,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                         }
                     }, TODRAW14, buttonTextParams4);
                     Button.ButtonParams buttonParams4 = new Button.ButtonParams();
-                    buttonParams4.width = 120f;
-                    buttonParams4.height = 24f;
+                    buttonParams4.width = 120f * scaleMult; // Scale width
+                    buttonParams4.height = 24f * scaleMult; // Scale height
                     Button.ButtonCallback buttonCallback4 = new Button.ButtonCallback() {
                         @Override
                         public void onClick() {
@@ -311,8 +318,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                         }
                     }, TODRAW14, buttonTextParams4);
                     Button.ButtonParams buttonParams4 = new Button.ButtonParams();
-                    buttonParams4.width = 120f;
-                    buttonParams4.height = 24f;
+                    buttonParams4.width = 120f * scaleMult; // Scale width
+                    buttonParams4.height = 24f * scaleMult; // Scale height
                     Button.ButtonCallback buttonCallback4 = new Button.ButtonCallback() {
                         @Override
                         public void onClick() {
@@ -330,8 +337,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initHostUI() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 300f;
-        panelParams.y = 120f;
+        panelParams.x = 300f * scaleMult; // Scale x position
+        panelParams.y = 120f * scaleMult; // Scale y position
         panelParams.conformToListSize = true;
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
@@ -360,8 +367,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     s = "";
                 }
                 TextEntryBox.TextEntryBoxParams textEntryBoxParams = new TextEntryBox.TextEntryBoxParams();
-                textEntryBoxParams.height = 26f;
-                textEntryBoxParams.width = 80f;
+                textEntryBoxParams.width = 80f * scaleMult; // Scale width
+                textEntryBoxParams.height = 26f * scaleMult; // Scale height
                 Text.TextParams entryBoxTextParams = new Text.TextParams();
                 entryBoxTextParams.align = LazyFont.TextAlignment.LEFT;
                 final TextEntryBox textEntryBox = new TextEntryBox(textEntryBoxParams, TODRAW14, entryBoxTextParams);
@@ -376,8 +383,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW14, buttonTextParams1);
                 Button.ButtonParams buttonParams1 = new Button.ButtonParams();
-                buttonParams1.width = 60f;
-                buttonParams1.height = 20f;
+                buttonParams1.width = 60f * scaleMult; // Scale width
+                buttonParams1.height = 20f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback1 = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -403,8 +410,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW24, buttonTextParams);
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
-                buttonParams.width = 120f;
-                buttonParams.height = 28f;
+                buttonParams.width = 120f * scaleMult; // Scale width
+                buttonParams.height = 28f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -425,8 +432,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initConnectionUI() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 300f;
-        panelParams.y = 150f;
+        panelParams.x = 300f * scaleMult; // Scale x position
+        panelParams.y = 150f * scaleMult; // Scale y position
         panelParams.conformToListSize = true;
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
@@ -466,8 +473,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     p = 0;
                 }
                 TextEntryBox.TextEntryBoxParams textEntryBoxParams = new TextEntryBox.TextEntryBoxParams();
-                textEntryBoxParams.height = 30f;
-                textEntryBoxParams.width = 200f;
+                textEntryBoxParams.width = 200f * scaleMult; // Scale width
+                textEntryBoxParams.height = 30f * scaleMult; // Scale height
                 Text.TextParams entryBoxTextParams = new Text.TextParams();
                 entryBoxTextParams.align = LazyFont.TextAlignment.LEFT;
                 final TextEntryBox textEntryBox1 = new TextEntryBox(textEntryBoxParams, TODRAW14, entryBoxTextParams);
@@ -484,8 +491,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW14, buttonTextParams1);
                 Button.ButtonParams buttonParams1 = new Button.ButtonParams();
-                buttonParams1.width = 60f;
-                buttonParams1.height = 20f;
+                buttonParams1.width = 60f * scaleMult; // Scale width
+                buttonParams1.height = 20f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback1 = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -512,8 +519,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }, TODRAW24, buttonTextParams);
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
-                buttonParams.width = 120f;
-                buttonParams.height = 28f;
+                buttonParams.width = 120f * scaleMult; // Scale width
+                buttonParams.height = 28f * scaleMult; // Scale height
                 Button.ButtonCallback buttonCallback = new Button.ButtonCallback() {
                     @Override
                     public void onClick() {
@@ -600,8 +607,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private GridPanel initShipSelectionUI(final MPPlugin plugin) {
         final GridPanel.GridParams params = new GridPanel.GridParams();
-        params.x = 1000f;
-        params.y = 600f;
+        params.x = 1000f * scaleMult; // Scale x position
+        params.y = 600f * scaleMult; // Scale y position
         params.edgePad = 0f;
         params.update = true;
 
@@ -648,8 +655,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                         break;
 
                     ListPanel.ListPanelParams listPanelParams = new ListPanel.ListPanelParams();
-                    listPanelParams.x = dx;
-                    listPanelParams.y = dy;
+                    listPanelParams.x = dx * scaleMult; // Scale x position
+                    listPanelParams.y = dy * scaleMult; // Scale y position
                     listPanelParams.mode = ListPanel.ListMode.VERTICAL;
                     listPanelParams.update = true;
                     listPanelParams.conformToListSize = false;
@@ -675,8 +682,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
                             Text.TextParams textParams1 = new Text.TextParams();
                             textParams1.align = LazyFont.TextAlignment.LEFT;
-                            textParams1.maxWidth = dx;
-                            textParams1.maxHeight = dy;
+                            textParams1.maxWidth = dx * scaleMult; // Scale width
+                            textParams1.maxHeight = dy * scaleMult; // Scale height
                             textParams1.color = c;
                             Text text1 = new Text(new Execute<String>() {
                                 @Override
@@ -690,8 +697,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
                             Text.TextParams textParams2 = new Text.TextParams();
                             textParams2.align = LazyFont.TextAlignment.LEFT;
-                            textParams2.maxWidth = dx;
-                            textParams2.maxHeight = dy;
+                            textParams2.maxWidth = dx * scaleMult; // Scale width
+                            textParams2.maxHeight = dy * scaleMult; // Scale height
                             textParams2.color = Color.WHITE;
                             Text text2 = new Text(new Execute<String>() {
                                 @Override
@@ -710,12 +717,12 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                             }, TODRAW14, textParams2);
 
                             Button.ButtonParams buttonParams = new Button.ButtonParams();
-                            buttonParams.height = 24f;
-                            buttonParams.width = 140f;
+                            buttonParams.width = 140f * scaleMult; // Scale width
+                            buttonParams.height = 24f * scaleMult; // Scale height
                             final Text.TextParams buttonTextParams = new Text.TextParams();
                             buttonTextParams.color = Color.WHITE;
-                            buttonTextParams.maxHeight = 16f;
-                            buttonTextParams.maxWidth = 40f;
+                            buttonTextParams.maxWidth = 40f * scaleMult; // Scale width
+                            buttonTextParams.maxHeight = 16f * scaleMult; // Scale height
                             buttonTextParams.align = LazyFont.TextAlignment.CENTER;
                             Text buttonText = new Text(new Execute<String>() {
                                 @Override
