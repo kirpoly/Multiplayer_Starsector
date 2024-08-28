@@ -105,10 +105,10 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
         float w = Global.getSettings().getScreenWidthPixels();
         float h = Global.getSettings().getScreenHeightPixels();
 
-        Vector2f root1 = new Vector2f(w - 32f, h - 148f);
+        Vector2f root1 = new Vector2f(w - 32f * scaleMult, h - 148f * scaleMult);
         CMUKitUI.render(widgetPanel, root1, events);
 
-        Vector2f root2 = new Vector2f(w - 306f, h - 175f);
+        Vector2f root2 = new Vector2f(w - 306f * scaleMult, h - 175f * scaleMult);
 
         shipSelectionPanel = initShipSelectionUI(plugin);
 
@@ -640,7 +640,7 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }
 
-                final int x = 5, y = 4, max = x * y;
+                final int x = Math.round(5 * scaleMult), y = Math.round(4 * scaleMult), max = x * y;
                 int xi = 0, yi = 0;
                 final float dx = params.x / x, dy = params.y / y;
 
@@ -655,8 +655,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                         break;
 
                     ListPanel.ListPanelParams listPanelParams = new ListPanel.ListPanelParams();
-                    listPanelParams.x = dx * scaleMult; // Scale x position
-                    listPanelParams.y = dy * scaleMult; // Scale y position
+                    // Floats dx and dy are already scaled
+                    listPanelParams.x = dx;
+                    listPanelParams.y = dy;
                     listPanelParams.mode = ListPanel.ListMode.VERTICAL;
                     listPanelParams.update = true;
                     listPanelParams.conformToListSize = false;
