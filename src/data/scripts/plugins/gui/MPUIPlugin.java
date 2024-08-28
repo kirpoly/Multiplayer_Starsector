@@ -169,8 +169,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initWidget() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 26f * scaleMult; // Scale x position
-        panelParams.y = 26f * scaleMult; // Scale y position
+        // Scale x and y positions
+        panelParams.x = 26f * scaleMult;
+        panelParams.y = 26f * scaleMult;
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
             @Override
@@ -206,8 +207,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initSelect() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 300f * scaleMult; // Scale x position
-        panelParams.y = 120f * scaleMult; // Scale y position
+        // Scale x and y positions
+        panelParams.x = 300f * scaleMult;
+        panelParams.y = 120f * scaleMult;
         panelParams.update = true;
         panelParams.conformToListSize = true;
 
@@ -337,8 +339,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initHostUI() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 300f * scaleMult; // Scale x position
-        panelParams.y = 120f * scaleMult; // Scale y position
+        // Scale x and y positions
+        panelParams.x = 300f * scaleMult;
+        panelParams.y = 120f * scaleMult;
         panelParams.conformToListSize = true;
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
@@ -432,8 +435,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initConnectionUI() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 300f * scaleMult; // Scale x position
-        panelParams.y = 150f * scaleMult; // Scale y position
+        // Scale x and y positions
+        panelParams.x = 300f * scaleMult;
+        panelParams.y = 150f * scaleMult;
         panelParams.conformToListSize = true;
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
@@ -607,8 +611,9 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     private GridPanel initShipSelectionUI(final MPPlugin plugin) {
         final GridPanel.GridParams params = new GridPanel.GridParams();
-        params.x = 1000f * scaleMult; // Scale x position
-        params.y = 600f * scaleMult; // Scale y position
+        // Scale x and y positions
+        params.x = 1000f * scaleMult;
+        params.y = 600f * scaleMult;
         params.edgePad = 0f;
         params.update = true;
 
