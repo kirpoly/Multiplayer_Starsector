@@ -1,6 +1,5 @@
 package data.scripts.plugins.gui;
 
-import cmu.gui.Button;
 import cmu.gui.*;
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
@@ -39,6 +38,7 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
     private ListPanel widgetPanel;
     private ListPanel selectPanel;
     private GridPanel shipSelectionPanel;
+
     private enum ActivePanel {
         NONE,
         SELECT,
@@ -46,6 +46,7 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
         JOIN,
         SHIP_SELECT
     }
+
     private ActivePanel active = ActivePanel.NONE;
 
     private boolean cameraLockToShip = false;
@@ -57,7 +58,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/victor14.fnt");
                 TODRAW14 = fontdraw.createText();
-                if (Global.getSettings().getScreenScaleMult() > 1f) TODRAW14.setFontSize(14f * Global.getSettings().getScreenScaleMult());
+                if (Global.getSettings().getScreenScaleMult() > 1f)
+                    TODRAW14.setFontSize(14f * Global.getSettings().getScreenScaleMult());
             } catch (FontException ignored) {
             }
         }
@@ -65,7 +67,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/orbitron24aa.fnt");
                 TODRAW24 = fontdraw.createText();
-                if (Global.getSettings().getScreenScaleMult() > 1f) TODRAW24.setFontSize(24f * Global.getSettings().getScreenScaleMult());
+                if (Global.getSettings().getScreenScaleMult() > 1f)
+                    TODRAW24.setFontSize(24f * Global.getSettings().getScreenScaleMult());
             } catch (FontException ignored) {
             }
         }
@@ -81,11 +84,13 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
         if (Global.getCurrentState() == GameState.TITLE) {
             return;
         }
-        if (TODRAW14 == null) return;
+        if (TODRAW14 == null)
+            return;
 
         MPPlugin plugin = (MPPlugin) Global.getCombatEngine().getCustomData().get(MPPlugin.DATA_KEY);
         if (plugin instanceof MPClientPlugin) {
-            if (shipSelectionPanel == null) shipSelectionPanel = initShipSelectionUI(plugin);
+            if (shipSelectionPanel == null)
+                shipSelectionPanel = initShipSelectionUI(plugin);
         } else {
             shipSelectionPanel = null;
         }
@@ -148,7 +153,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                 CMUKitUI.render(joinPanel, root2, events);
                 break;
             case SHIP_SELECT:
-                Vector2f s = new Vector2f((w - shipSelectionPanel.getWidth()) * 0.5f, (h + shipSelectionPanel.getHeight()) * 0.5f);
+                Vector2f s = new Vector2f((w - shipSelectionPanel.getWidth()) * 0.5f,
+                        (h + shipSelectionPanel.getHeight()) * 0.5f);
                 CMUKitUI.render(shipSelectionPanel, s, events);
                 break;
         }
@@ -534,7 +540,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
         });
     }
 
-/*
+    // @formatter:off
+    /*
     private ListPanel initShipSelectionUI() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
         panelParams.x = 300f;
@@ -588,7 +595,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
             }
         });
     }
-*/
+    */
+    // @formatter:on
 
     private GridPanel initShipSelectionUI(final MPPlugin plugin) {
         final GridPanel.GridParams params = new GridPanel.GridParams();
@@ -609,14 +617,17 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                 } else if (plugin.getType() == MPPlugin.PluginType.SERVER) {
                     ShipTable shipTable = (ShipTable) plugin.getEntityManagers().get(ShipTable.class);
                     for (ShipData data : shipTable.getShipTable().array()) {
-                        if (data == null || data.getShip() == null) continue;
+                        if (data == null || data.getShip() == null)
+                            continue;
 
                         ships.add(data.getShip());
                     }
                 } else if (plugin.getType() == MPPlugin.PluginType.CLIENT) {
-                    ClientShipTable clientShipTable = (ClientShipTable) plugin.getEntityManagers().get(ClientShipTable.class);
+                    ClientShipTable clientShipTable = (ClientShipTable) plugin.getEntityManagers()
+                            .get(ClientShipTable.class);
                     for (ShipData data : clientShipTable.getShipTable().array()) {
-                        if (data == null || data.getShip() == null) continue;
+                        if (data == null || data.getShip() == null)
+                            continue;
 
                         ships.add(data.getShip());
                     }
@@ -630,9 +641,11 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
                 int i = 0;
                 for (final ShipAPI ship : ships) {
-                    if (ship.isFighter()) continue;
+                    if (ship.isFighter())
+                        continue;
 
-                    if (i > max - 1) break;
+                    if (i > max - 1)
+                        break;
 
                     ListPanel.ListPanelParams listPanelParams = new ListPanel.ListPanelParams();
                     listPanelParams.x = dx;
@@ -669,7 +682,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                                 @Override
                                 public String get() {
                                     String n = ship.getName();
-                                    if (n == null) return "NULL";
+                                    if (n == null)
+                                        return "NULL";
                                     return n;
                                 }
                             }, TODRAW14, textParams1);
@@ -689,8 +703,7 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                                             (int) ship.getLocation().x,
                                             (int) ship.getLocation().y,
                                             (int) ship.getVelocity().x,
-                                            (int) ship.getVelocity().y
-                                    );
+                                            (int) ship.getVelocity().y);
 
                                     return sf;
                                 }
@@ -731,15 +744,19 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                                         }
 
                                         ShipAPI s = client.getPlayerShip().getActiveShip();
-                                        if (s == null) return "ACTIVE";
+                                        if (s == null)
+                                            return "ACTIVE";
                                     } else if (plugin instanceof MPServerPlugin) {
                                         MPServerPlugin server = (MPServerPlugin) plugin;
 
-                                        PlayerShips playerShips = (PlayerShips) server.getEntityManagers().get(PlayerShips.class);
-                                        ShipTable shipTable = (ShipTable) server.getEntityManagers().get(ShipTable.class);
+                                        PlayerShips playerShips = (PlayerShips) server.getEntityManagers()
+                                                .get(PlayerShips.class);
+                                        ShipTable shipTable = (ShipTable) server.getEntityManagers()
+                                                .get(ShipTable.class);
 
                                         Short id = shipTable.getRegistered().get(ship);
-                                        if (id == null) return "NULL";
+                                        if (id == null)
+                                            return "NULL";
 
                                         if (id.equals(playerShips.getHostShipID())) {
                                             buttonTextParams.color = Color.YELLOW;
@@ -766,13 +783,15 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                                     switch (plugin.getType()) {
                                         case CLIENT:
                                             MPClientPlugin clientPlugin = (MPClientPlugin) plugin;
-                                            PlayerShip playerShip = (PlayerShip) clientPlugin.getEntityManagers().get(PlayerShip.class);
+                                            PlayerShip playerShip = (PlayerShip) clientPlugin.getEntityManagers()
+                                                    .get(PlayerShip.class);
 
                                             playerShip.requestTransfer(ship);
                                             break;
                                         case SERVER:
                                             MPServerPlugin serverPlugin = (MPServerPlugin) plugin;
-                                            PlayerShips playerShips = (PlayerShips) serverPlugin.getEntityManagers().get(PlayerShips.class);
+                                            PlayerShips playerShips = (PlayerShips) serverPlugin.getEntityManagers()
+                                                    .get(PlayerShips.class);
 
                                             playerShips.transferControl(ship, true, null, (byte) 0);
                                             break;
@@ -802,7 +821,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
         int p;
         try {
             p = Integer.parseInt(port);
-            if (p < 1026 || p > 65535) throw new NumberFormatException();
+            if (p < 1026 || p > 65535)
+                throw new NumberFormatException();
         } catch (NumberFormatException n) {
             infoText.setExecute(new Execute<String>() {
                 @Override
