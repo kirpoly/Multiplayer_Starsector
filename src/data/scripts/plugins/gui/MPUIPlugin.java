@@ -645,7 +645,7 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                     }
                 }
 
-                final int x = Math.round(5 * scaleMult), y = Math.round(4 * scaleMult), max = x * y;
+                final int x = 5, y = 4, max = x * y;  // Seems like columns and rows
                 int xi = 0, yi = 0;
                 final float dx = params.x / x, dy = params.y / y;
 
