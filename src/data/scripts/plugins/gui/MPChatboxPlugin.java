@@ -53,6 +53,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/victor14.fnt");
                 TODRAW14 = fontdraw.createText();
+                // If scaling is greater than 1, adjust small font size by the multiplier
                 if (scaleMult > 1f)
                     TODRAW14.setFontSize(14f * scaleMult);
             } catch (FontException ignored) {
@@ -74,6 +75,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
         float w = Global.getSettings().getScreenWidthPixels();
         float h = Global.getSettings().getScreenHeightPixels();
 
+        // Use scaleMult to adjust the root position of UI elements
         Vector2f root1 = new Vector2f(w - 92f * scaleMult, h - 244f * scaleMult);
         Vector2f root2 = new Vector2f(w - 364f * scaleMult, 596f * scaleMult);
 
@@ -93,7 +95,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initWidget() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        // Scale x and y positions
+        // Use scaleMult to set the x and y positions of the panel
         panelParams.x = 60f * scaleMult;
         panelParams.y = 26f * scaleMult;
 
@@ -101,6 +103,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
             @Override
             public void make(ListPanel panel1) {
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
+                // Use scaleMult to set the width and height of the button
                 buttonParams.width = 58f * scaleMult;
                 buttonParams.height = 24f * scaleMult;
                 Text.TextParams textParams = new Text.TextParams();
@@ -134,7 +137,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initChatbox() {
         final ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        // Scale x and y positions
+        // Use scaleMult to set the x and y positions of the panel
         panelParams.x = 360f * scaleMult;
         panelParams.y = 380f * scaleMult;
         panelParams.update = false;
@@ -147,6 +150,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
                 panel1.addChild(textPanel);
 
                 TextEntryBox.TextEntryBoxParams textEntryBoxParams = new TextEntryBox.TextEntryBoxParams();
+                // Use scaleMult to set the width and height of the button
                 textEntryBoxParams.width = 350f * scaleMult;
                 textEntryBoxParams.height = 24f * scaleMult;
                 Text.TextParams textParams1 = new Text.TextParams();
@@ -154,6 +158,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
                 panel1.addChild(textEntryBox);
 
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
+                // Use scaleMult to set the width and height of the button
                 buttonParams.width = 42f * scaleMult;
                 buttonParams.height = 17f * scaleMult;
                 Text.TextParams textParams = new Text.TextParams();
@@ -178,12 +183,15 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initTextPanel() {
         final ListPanel.ListPanelParams textPanelParams = new ListPanel.ListPanelParams();
-        // Scale x and y positions
+        // Use scaleMult to set the x and y positions of the panel
         textPanelParams.x = 350f * scaleMult;
         textPanelParams.y = 360f * scaleMult;
         textPanelParams.noDeco = true;
         textPanelParams.conformToListSize = true;
         textPanelParams.update = true;
+
+        // Define a padding value to ensure text is not too close to the edges
+        final float padding = 4f;
 
         return new ListPanel(textPanelParams, new ListPanel.PanelMaker() {
             @Override
@@ -204,14 +212,16 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
                     final String tt = t;
 
                     TODRAW14.setText(t);
-                    TODRAW14.setMaxWidth(textPanelParams.x - 4f * scaleMult);
+                    // Set the maximum width of the text, applying padding and scaling
+                    TODRAW14.setMaxWidth(textPanelParams.x - padding * scaleMult);
                     height += TODRAW14.getHeight();
                     if (height > textPanelParams.y) break;
 
                     Text.TextParams textParams = new Text.TextParams();
                     textParams.color = Color.WHITE;
-                    textParams.maxWidth = textPanelParams.x - 4f * scaleMult;
-                    textParams.maxHeight = 50f * scaleMult;
+                    // Set the maximum width the text can occupy within the panel, applying padding and scaling
+                    textParams.maxWidth = textPanelParams.x - padding * scaleMult;
+                    textParams.maxHeight = 50f * scaleMult; // Scale the text height
                     Text text = new Text(new Execute<String>() {
                         @Override
                         public String get() {
