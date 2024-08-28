@@ -20,6 +20,9 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
     // singleton
     public static MPChatboxPlugin INSTANCE = null;
 
+    // Define a class-level field for the scaling multiplier
+    private float scaleMult;
+
     private static LazyFont.DrawableString TODRAW14;
 
     private String input;
@@ -43,12 +46,15 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     @Override
     public void init(CombatEngineAPI engine) {
+        // Initialize scaling multiplier
+        scaleMult = Global.getSettings().getScreenScaleMult();
+
         if (TODRAW14 == null) {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/victor14.fnt");
                 TODRAW14 = fontdraw.createText();
-                if (Global.getSettings().getScreenScaleMult() > 1f)
-                    TODRAW14.setFontSize(14f * Global.getSettings().getScreenScaleMult());
+                if (scaleMult > 1f)
+                    TODRAW14.setFontSize(14f * scaleMult);
             } catch (FontException ignored) {
             }
         }
@@ -68,8 +74,8 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
         float w = Global.getSettings().getScreenWidthPixels();
         float h = Global.getSettings().getScreenHeightPixels();
 
-        Vector2f root1 = new Vector2f(w - 92f, h - 148f);
-        Vector2f root2 = new Vector2f(w - 364f, 500f);
+        Vector2f root1 = new Vector2f(w - 92f * scaleMult, h - 148f * scaleMult);
+        Vector2f root2 = new Vector2f(w - 364f * scaleMult, 500f * scaleMult);
 
         CMUKitUI.render(widget, root1, events);
 
@@ -87,15 +93,16 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initWidget() {
         ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 60f;
-        panelParams.y = 26f;
+        // Scale x and y positions
+        panelParams.x = 60f * scaleMult;
+        panelParams.y = 26f * scaleMult;
 
         return new ListPanel(panelParams, new ListPanel.PanelMaker() {
             @Override
             public void make(ListPanel panel1) {
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
-                buttonParams.width = 58f;
-                buttonParams.height = 24f;
+                buttonParams.width = 58f * scaleMult;
+                buttonParams.height = 24f * scaleMult;
                 Text.TextParams textParams = new Text.TextParams();
                 textParams.align = LazyFont.TextAlignment.CENTER;
                 Text text = new Text(new Execute<String>() {
@@ -127,8 +134,9 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initChatbox() {
         final ListPanel.ListPanelParams panelParams = new ListPanel.ListPanelParams();
-        panelParams.x = 360f;
-        panelParams.y = 380f;
+        // Scale x and y positions
+        panelParams.x = 360f * scaleMult;
+        panelParams.y = 380f * scaleMult;
         panelParams.update = false;
 
         final ListPanel textPanel = initTextPanel();
@@ -139,15 +147,15 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
                 panel1.addChild(textPanel);
 
                 TextEntryBox.TextEntryBoxParams textEntryBoxParams = new TextEntryBox.TextEntryBoxParams();
-                textEntryBoxParams.width = 350f;
-                textEntryBoxParams.height = 24f;
+                textEntryBoxParams.width = 350f * scaleMult;
+                textEntryBoxParams.height = 24f * scaleMult;
                 Text.TextParams textParams1 = new Text.TextParams();
                 final TextEntryBox textEntryBox = new TextEntryBox(textEntryBoxParams, TODRAW14, textParams1);
                 panel1.addChild(textEntryBox);
 
                 Button.ButtonParams buttonParams = new Button.ButtonParams();
-                buttonParams.width = 42f;
-                buttonParams.height = 17f;
+                buttonParams.width = 42f * scaleMult;
+                buttonParams.height = 17f * scaleMult;
                 Text.TextParams textParams = new Text.TextParams();
                 textParams.align = LazyFont.TextAlignment.CENTER;
                 Text text = new Text(new Execute<String>() {
@@ -170,8 +178,9 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
 
     private ListPanel initTextPanel() {
         final ListPanel.ListPanelParams textPanelParams = new ListPanel.ListPanelParams();
-        textPanelParams.x = 350f;
-        textPanelParams.y = 360f;
+        // Scale x and y positions
+        textPanelParams.x = 350f * scaleMult;
+        textPanelParams.y = 360f * scaleMult;
         textPanelParams.noDeco = true;
         textPanelParams.conformToListSize = true;
         textPanelParams.update = true;
@@ -195,14 +204,14 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
                     final String tt = t;
 
                     TODRAW14.setText(t);
-                    TODRAW14.setMaxWidth(textPanelParams.x - 4f);
+                    TODRAW14.setMaxWidth(textPanelParams.x - 4f * scaleMult);
                     height += TODRAW14.getHeight();
                     if (height > textPanelParams.y) break;
 
                     Text.TextParams textParams = new Text.TextParams();
                     textParams.color = Color.WHITE;
-                    textParams.maxWidth = textPanelParams.x - 4f;
-                    textParams.maxHeight = 50f;
+                    textParams.maxWidth = textPanelParams.x - 4f * scaleMult;
+                    textParams.maxHeight = 50f * scaleMult;
                     Text text = new Text(new Execute<String>() {
                         @Override
                         public String get() {
