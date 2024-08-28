@@ -30,6 +30,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
         CHAT,
         NONE,
     }
+
     private ActivePanel active = ActivePanel.TEXT_ONLY;
 
     private ListPanel widget;
@@ -46,7 +47,8 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
             try {
                 LazyFont fontdraw = LazyFont.loadFont("graphics/fonts/victor14.fnt");
                 TODRAW14 = fontdraw.createText();
-                if (Global.getSettings().getScreenScaleMult() > 1f) TODRAW14.setFontSize(14f * Global.getSettings().getScreenScaleMult());
+                if (Global.getSettings().getScreenScaleMult() > 1f)
+                    TODRAW14.setFontSize(14f * Global.getSettings().getScreenScaleMult());
             } catch (FontException ignored) {
             }
         }
@@ -211,7 +213,7 @@ public class MPChatboxPlugin extends BaseEveryFrameCombatPlugin {
                     toAdd.add(text);
                 }
 
-                for (int i = toAdd.size(); i-- > 0;) {
+                for (int i = toAdd.size(); i-- > 0; ) {
                     panel.addChild(toAdd.get(i));
                 }
             }

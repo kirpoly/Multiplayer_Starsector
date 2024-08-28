@@ -58,7 +58,7 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
 
     @Override
     public void init(CombatEngineAPI engine) {
-        // Initialize scaleMult once
+        // Initialize scaling multiplier
         scaleMult = Global.getSettings().getScreenScaleMult();
 
         if (TODRAW14 == null) {
@@ -710,8 +710,8 @@ public class MPUIPlugin extends BaseEveryFrameCombatPlugin {
                                 @Override
                                 public String get() {
                                     String sf = String.format("%s"
-                                            + "\nLOC: [%s, %s]"
-                                            + "\nVEL: [%s, %s]",
+                                                    + "\nLOC: [%s, %s]"
+                                                    + "\nVEL: [%s, %s]",
                                             ship.getHullSpec().getNameWithDesignationWithDashClass(),
                                             (int) ship.getLocation().x,
                                             (int) ship.getLocation().y,
