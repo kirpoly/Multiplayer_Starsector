@@ -1,1 +1,17 @@
+# Build systems
+/.gradle/
+/build/
+/out/
 /target/
+
+# IntelliJ IDEA
+/.idea/
+/*.iml
+
+# VS Code
+/.vscode/
+
+# Eclipse (if ever used)
+/.project
+/.classpath
+/.settings/
